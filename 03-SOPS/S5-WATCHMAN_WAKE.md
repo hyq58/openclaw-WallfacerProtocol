@@ -12,21 +12,21 @@ The Watchman is the background service that monitors agent health, triggers sche
 
 Signs the Watchman has stopped:
 - Agent heartbeats missing for >30 minutes
-- Trigger files (`*.trigger`) not being processed
+- Trigger files not being processed
 - Mailbox messages going unanswered
 
 ## Wake Procedure
 
 ```bash
 # 1. Check current state
-openclaw gateway status
+gateway status
 
 # 2. If stopped, restart
-openclaw gateway restart
+gateway restart
 
 # 3. Verify agents are responsive
-touch ~/.openclaw/agents/sun/agent/.trigger
-# Expect: response in mailbox within 60 seconds
+touch /path/to/agents/sun/agent/.trigger
+# Expect: response within 60 seconds
 
 # 4. If restart fails, escalate to Owner
 ```

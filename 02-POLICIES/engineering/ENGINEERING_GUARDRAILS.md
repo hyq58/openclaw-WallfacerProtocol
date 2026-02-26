@@ -63,9 +63,9 @@ ROLLBACK: <specific, testable reversal action>
 ```
 
 Examples of valid rollbacks:
-- ✅ `cp ~/.openclaw/backup/config.bak ~/.openclaw/config`
+- ✅ `cp backup/config.bak config/`
 - ✅ `git revert HEAD`
-- ✅ `launchctl unload ~/Library/LaunchAgents/ai.task.plist`
+- ✅ `systemctl stop <service>`
 
 Examples of invalid rollbacks:
 - ❌ `Restore manually`
