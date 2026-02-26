@@ -1,0 +1,35 @@
+name: "Task / 任务"
+description: "Request implementation work"
+title: "[TASK] "
+labels: ["task"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 任务描述 / Task Description
+
+  - type: textarea
+    attributes:
+      label: "What needs to be done?"
+      placeholder: "Describe the desired end state"
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 验收标准 / Acceptance Criteria
+
+  - type: textarea
+    attributes:
+      label: "How do we know it's done?"
+      placeholder: "List concrete acceptance criteria"
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 回滚方案 / Rollback Plan
+
+  - type: textarea
+    attributes:
+      label: "How do we undo this if it fails?"
+      placeholder: "Specific commands or steps"

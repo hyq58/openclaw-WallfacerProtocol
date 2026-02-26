@@ -1,0 +1,33 @@
+name: Export PDF
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '00-CHARTER/**'
+      - '01-GOVERNANCE/**'
+      - '02-POLICIES/**'
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install pandoc
+        run: sudo apt-get install -y pandoc
+
+      - name: Export CHARTER to PDF
+        run: |
+          mkdir -p 00-CHARTER/exports
+          pandoc 00-CHARTER/CHARTER.md -o 00-CHARTER/exports/CHARTER.latest.pdf
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pdf-exports
+          path: 00-CHARTER/exports/*.pdf
+
+      - name: Generate SHA256
+        run: |
+          sha256sum 00-CHARTER/exports/CHARTER.latest.pdf > 00-CHARTER/exports/CHARTER.latest.sha256

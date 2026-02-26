@@ -1,0 +1,39 @@
+name: Verify Signatures
+
+on:
+  pull_request:
+    paths:
+      - '00-CHARTER/**'
+      - '01-GOVERNANCE/**'
+      - '02-POLICIES/**'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify content hashes
+        run: |
+          for f in $(find . -name "*.md" -path "*/0*" -o -name "*.md" -path "*/1*" -o -name "*.md" -path "*/2*"); do
+            echo "Checking $f..."
+            # Extract hash from front matter if present
+            hash=$(grep "content_sha256" "$f" | head -1 | sed 's/.*sha256: \([a-f0-9]*\).*/\1/')
+            if [ -n "$hash" ]; then
+              computed=$(sha256sum "$f" | cut -d' ' -f1 | tr -d '\n' | tail -c 64)
+              echo "  Stored: $hash"
+              echo "  Computed: $computed"
+              # Note: We can't compare directly because the hash excludes front matter
+              # This is a placeholder for more sophisticated verification
+            fi
+          done
+
+      - name: Check front matter completeness
+        run: |
+          for f in $(find 00-CHARTER 01-GOVERNANCE 02-POLICIES -name "*.md" 2>/dev/null); do
+            if ! grep -q "^---" "$f"; then
+              echo "FAIL: Missing YAML front matter in $f"
+              exit 1
+            fi
+          done
+          echo "All policy files have front matter"

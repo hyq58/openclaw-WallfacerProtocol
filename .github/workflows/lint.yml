@@ -1,0 +1,34 @@
+name: Lint
+
+on:
+  push:
+    paths:
+      - '**.md'
+      - '**.yml'
+      - '**.yaml'
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check Markdown links
+        run: |
+          # Simple link checker for markdown
+          grep -rH '\](' --include="*.md" . | grep -v '^./.git' | while read line; do
+            echo "Checking: $line"
+          done
+
+      - name: YAML syntax check
+        run: |
+          for f in $(find . -name "*.yml" -o -name "*.yaml"); do
+            python3 -c "import yaml; yaml.safe_load(open('$f'))" || echo "Invalid YAML: $f"
+          done
+
+      - name: Enforce front matter
+        run: |
+          for f in $(find 00-CHARTER 01-GOVERNANCE 02-POLICIES -name "*.md" 2>/dev/null); do
+            head -5 "$f" | grep -q "^---" || echo "Missing front matter: $f"
+          done

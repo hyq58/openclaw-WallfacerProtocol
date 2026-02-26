@@ -1,0 +1,11 @@
+# Codeowners
+
+# The human owner has final authority
+* @hyq58
+
+# Governance layer — requires owner approval
+/00-CHARTER/ @hyq58
+/01-GOVERNANCE/ @hyq58
+
+# Policy changes require owner sign-off
+/02-POLICIES/ @hyq58

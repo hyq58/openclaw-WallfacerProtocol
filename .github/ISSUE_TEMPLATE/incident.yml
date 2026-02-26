@@ -1,0 +1,42 @@
+name: "Incident / 事故报告"
+description: "Report something that went wrong"
+title: "[INCIDENT] "
+labels: ["incident", "urgent"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 发生了什么 / What Happened
+
+  - type: textarea
+    attributes:
+      label: "Description"
+      placeholder: "Describe the incident"
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 影响范围 / Impact
+
+  - type: textarea
+    attributes:
+      label: "What was affected?"
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 根因分析 / Root Cause
+
+  - type: textarea
+    attributes:
+      label: "Why did this happen?"
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 纠正措施 / Corrective Action
+
+  - type: textarea
+    attributes:
+      label: "What are we doing to prevent recurrence?"

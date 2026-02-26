@@ -1,0 +1,45 @@
+name: "Rule/Policy Change / 规则变更提案"
+description: "Propose changes to Charter, Governance, or Policies"
+title: "[POLICY] "
+labels: ["policy", "needs-review"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 背景 / Context
+        What problem are you trying to solve?
+
+  - type: textarea
+    attributes:
+      label: "Problem / 问题"
+      description: "Describe the issue or gap"
+      placeholder: "e.g., The current WIP=1 rule doesn't address..."
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 建议方案 / Proposed Solution
+
+  - type: textarea
+    attributes:
+      label: "Solution / 方案"
+      description: "What change are you proposing?"
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 影响分析 / Impact Analysis
+
+  - type: textarea
+    attributes:
+      label: "Impact / 影响"
+      description: "What breaks if this is implemented?"
+
+  - type: checkboxes
+    attributes:
+      label: "Checklist"
+      options:
+        - label: "I have written an ADR in 04-DECISIONS/"
+        - label: "Rollback path is defined"
+        - label: "This change doesn't reduce auditability"
